@@ -3,13 +3,14 @@
  *  You can find other projects on github.com/BesedinAlex
  */
 
-package main;
+package calculator_2;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Compf c = new Compf();
+    public static void main(String[] args) throws Exception {
+        //Compf c = new Compf();
+        Calc c = new Calc();
             while(true){
                 Scanner in = new Scanner(System.in);
                 System.out.print("\nType equation: ");

@@ -3,7 +3,7 @@
  *  You can find other projects on github.com/BesedinAlex
  */
 
-package main;
+package calculator_2;
 
 public class Stack {
     private static final int DEFSIZE = 16;
@@ -16,7 +16,7 @@ public class Stack {
     public final void push(char c) {
         array[head++] = c;
     }
-    public final char pop() {
+    public final char pull() {
         return array[--head];
     }
     public final char top() {
