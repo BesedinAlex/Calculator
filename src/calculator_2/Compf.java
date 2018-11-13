@@ -7,7 +7,7 @@ package calculator_2;
 
 public class Compf extends Stack {
     protected final static int SYM_LEFT = 0, SYM_RIGHT = 1, SYM_OPER = 2, SYM_OTHER = 3;
-    protected char lastC = 'a';
+    protected char lastC = '+';
     public void compile(char[] str) {
         processSymbol('(');
         for (int i = 0; i < str.length; i++) 
@@ -19,12 +19,15 @@ public class Compf extends Stack {
         System.out.print("\n");
     }
     protected int symType(char c) {
-        switch (c) {
+        switch(c) {
             case '(':
                 return SYM_LEFT;
             case ')':
                 return SYM_RIGHT;
-            case '+': case '-': case '*': case '/':
+            case '+':
+            case '-': 
+            case '*': 
+            case '/':
                 return SYM_OPER;
             default:
                 return symOther(c);
@@ -38,7 +41,7 @@ public class Compf extends Stack {
         return SYM_OTHER;
     }
     private void processSymbol(char c) {
-        switch (symType(c)) {
+        switch(symType(c)) {
             case SYM_LEFT:
                 push(c);
                 break;

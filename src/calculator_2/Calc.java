@@ -7,7 +7,6 @@ package calculator_2;
 
 public class Calc extends Compf {
     private final StackInt s;
-    protected char lastC = '0';
     public Calc() {
         s = new StackInt();
     }
@@ -15,7 +14,6 @@ public class Calc extends Compf {
         return (int) c - (int) '0';
     }
     @Override public final void compile(char[] str) {
-        s.push(0); // To use lastC without error
         super.compile(str);
         System.out.println("" + s.top());
     }

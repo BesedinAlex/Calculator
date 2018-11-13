@@ -6,7 +6,7 @@
 package calculator_2;
 
 public class Stack {
-    private final static int DEFSIZE = 16;
+    private final static int DEFSIZE = 32;
     private final char[] array;
     private int head;
     public Stack() {
