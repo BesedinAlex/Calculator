@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        //Compf c = new Compf();
         Calc c = new Calc();
             while(true){
                 Scanner in = new Scanner(System.in);

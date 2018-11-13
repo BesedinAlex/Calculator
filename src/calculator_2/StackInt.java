@@ -6,15 +6,15 @@
 package calculator_2;
 
 class StackInt {
-    private static final int DEFSIZE = 16;
-    private int[] array;
+    private final static int DEFSIZE = 32;
+    private final int[] array;
     private int head;
     public StackInt() {
         array = new int[DEFSIZE];
         head = 0;
     }
-    public final void push(int val) {
-        array[head++] = val;
+    public final void push(int digit) {
+        array[head++] = digit;
     }
     public final int pull() {
         return array[--head];
