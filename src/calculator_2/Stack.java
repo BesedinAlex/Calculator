@@ -6,8 +6,8 @@
 package calculator_2;
 
 public class Stack {
-    private static final int DEFSIZE = 16;
-    private char[] array;
+    private final static int DEFSIZE = 16;
+    private final char[] array;
     private int head;
     public Stack() {
         array = new char[DEFSIZE];

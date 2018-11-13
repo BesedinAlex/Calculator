@@ -6,20 +6,34 @@
 package calculator_2;
 
 public class Calc extends Compf {
-    private StackInt s;
-    private static int char2int(char c) {
-        return (int)c - (int)'0';
+    private final StackInt s;
+    protected char lastC = '0';
+    public Calc() {
+        s = new StackInt();
     }
-    @Override
-    protected int symOther(char c) {
+    private static int char2int(char c) {
+        return (int) c - (int) '0';
+    }
+    @Override public final void compile(char[] str) {
+        s.push(0); // To use lastC without error
+        super.compile(str);
+        System.out.println("" + s.top());
+    }
+    @Override protected int symOther(char c) {
         if (c < '0' || c > '9') {
             System.out.println("Недопустимый символ: " + c);
             System.exit(0);
         }
         return SYM_OTHER;
     }
-    @Override
-    protected void nextOper(char c) {
+    @Override protected void nextOther(char c) {
+        if(symType(lastC) == 3) {
+            int toIncrease = s.pull() * 10;
+            s.push(toIncrease + char2int(c));
+        }
+        else s.push(char2int(c));
+    }
+    @Override protected void nextOper(char c) {
         int second = s.pull();
         int first = s.pull();
         switch (c) {
@@ -36,17 +50,5 @@ public class Calc extends Compf {
                 s.push(first / second);
                 break;
         }
-    }
-    @Override
-    protected void nextOther(char c) {
-        s.push(char2int(c));
-    }
-    public Calc() {
-        s = new StackInt();
-    }
-    @Override
-    public final void compile(char[] str) {
-        super.compile(str);
-        System.out.println("" + s.top());
     }
 }
