@@ -6,7 +6,7 @@
 package calculator_2;
 
 public class Compf extends Stack {
-    protected final static int SYM_LEFT = 0, SYM_RIGHT = 1, SYM_OPER = 2, SYM_OTHER = 3;
+    protected final static int SYM_LEFT = 0, SYM_RIGHT = 1, SYM_OPER = 2, SYM_LEFT_DOUBLE = 3, SYM_RIGHT_DOUBLE = 4, SYM_OTHER = 5;
     protected char lastC = '+';
     public void compile(char[] str) {
         processSymbol('(');
@@ -16,6 +16,7 @@ public class Compf extends Stack {
             processSymbol(str[i]);
         }
         processSymbol(')');
+        lastC = '+';
         System.out.print("\n");
     }
     protected int symType(char c) {
@@ -29,6 +30,10 @@ public class Compf extends Stack {
             case '*': 
             case '/':
                 return SYM_OPER;
+            case '[':
+                return SYM_LEFT_DOUBLE;
+            case ']':
+                return SYM_RIGHT_DOUBLE;
             default:
                 return symOther(c);
         }
@@ -53,6 +58,14 @@ public class Compf extends Stack {
                 processSuspendedSymbols(c);
                 push(c);
                 break;
+            case SYM_LEFT_DOUBLE:
+                push(c);
+                break;
+            case SYM_RIGHT_DOUBLE:
+                processSuspendedSymbols(c);
+                pull();
+                _double(c);
+                break;
             case SYM_OTHER:
                 nextOther(c);
                 break;
@@ -62,18 +75,21 @@ public class Compf extends Stack {
         while (precedes(top(), c)) nextOper(pull());
     }
     private boolean precedes(char a, char b) {
-        if (symType(a) == SYM_LEFT) return false;
-        if (symType(b) == SYM_RIGHT) return true;
+        if (symType(a) == SYM_LEFT || symType(a) == SYM_LEFT_DOUBLE) return false;
+        if (symType(b) == SYM_RIGHT || symType(b) == SYM_RIGHT_DOUBLE) return true;
         return priority(a) >= priority(b);
     }
     private int priority(char c) {
         return c == '+' || c == '-' ? 1 : 2; // if (c == '+' || c == '-') return 1; else return 2;
     }
     protected void nextOther(char c) {
-        if (symType(lastC) == 3) System.out.print(c);
+        if (symType(lastC) == SYM_OTHER) System.out.print(c);
         else System.out.print(" " + c);
     }
     protected void nextOper(char c) {
         System.out.print(" " + c);
+    }
+    protected void _double(char c) {
+        System.out.print(" *2");
     }
 }

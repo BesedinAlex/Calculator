@@ -25,16 +25,13 @@ public class Calc extends Compf {
         return SYM_OTHER;
     }
     @Override protected void nextOther(char c) {
-        if(symType(lastC) == 3) {
-            int toIncrease = s.pull() * 10;
-            s.push(toIncrease + char2int(c));
-        }
+        if (symType(lastC) == SYM_OTHER) s.push(s.pull() * 10 + char2int(c));
         else s.push(char2int(c));
     }
     @Override protected void nextOper(char c) {
         int second = s.pull();
         int first = s.pull();
-        switch (c) {
+        switch(c) {
             case '+':
                 s.push(first + second);
                 break;
@@ -48,5 +45,8 @@ public class Calc extends Compf {
                 s.push(first / second);
                 break;
         }
+    }
+    @Override protected void _double(char c) {
+        s.push(s.pull() * 2);
     }
 }
