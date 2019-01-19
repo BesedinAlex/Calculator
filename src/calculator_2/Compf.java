@@ -5,8 +5,7 @@ public class Compf extends Stack {
     protected char lastC = '+';
     public void compile(char[] str) {
         processSymbol('(');
-        for (int i = 0; i < str.length; i++) 
-        {
+        for (int i = 0; i < str.length; i++) {
             if (i > 0) lastC = str[i - 1];
             processSymbol(str[i]);
         }
@@ -15,14 +14,14 @@ public class Compf extends Stack {
         System.out.print("\n");
     }
     protected int symType(char c) {
-        switch(c) {
+        switch (c) {
             case '(':
                 return SYM_LEFT;
             case ')':
                 return SYM_RIGHT;
             case '+':
-            case '-': 
-            case '*': 
+            case '-':
+            case '*':
             case '/':
                 return SYM_OPER;
             case '[':
@@ -41,7 +40,7 @@ public class Compf extends Stack {
         return SYM_OTHER;
     }
     private void processSymbol(char c) {
-        switch(symType(c)) {
+        switch (symType(c)) {
             case SYM_LEFT:
                 push(c);
                 break;
@@ -75,7 +74,7 @@ public class Compf extends Stack {
         return priority(a) >= priority(b);
     }
     private int priority(char c) {
-        return c == '+' || c == '-' ? 1 : 2; // if (c == '+' || c == '-') return 1; else return 2;
+        return c == '+' || c == '-' ? 1 : 2;
     }
     protected void nextOther(char c) {
         if (symType(lastC) == SYM_OTHER) System.out.print(c);

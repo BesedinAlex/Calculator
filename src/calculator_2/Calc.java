@@ -10,7 +10,7 @@ public class Calc extends Compf {
     }
     @Override public final void compile(char[] str) {
         super.compile(str);
-        System.out.println("" + s.top());
+        System.out.println(s.top());
     }
     @Override protected int symOther(char c) {
         if (c < '0' || c > '9') {
