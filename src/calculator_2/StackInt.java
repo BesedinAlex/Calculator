@@ -1,11 +1,6 @@
-/*
- *  Created by BesedinAlex (c) 2018
- *  You can find other projects on github.com/BesedinAlex
- */
-
 package calculator_2;
 
-class StackInt {
+public class StackInt {
     private final static int DEFSIZE = 32;
     private final int[] array;
     private int head;

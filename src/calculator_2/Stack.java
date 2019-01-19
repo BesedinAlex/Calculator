@@ -1,8 +1,3 @@
-/*
- *  Created by BesedinAlex (c) 2018
- *  You can find other projects on github.com/BesedinAlex
- */
-
 package calculator_2;
 
 public class Stack {
